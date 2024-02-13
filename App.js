@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+// import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { useFonts } from "expo-font";
 import { useCallback } from "react";
@@ -23,7 +23,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <AppNavigator />
-      <StatusBar style="auto" />
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }

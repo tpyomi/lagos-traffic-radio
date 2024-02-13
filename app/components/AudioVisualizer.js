@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import Animated from "react-native-reanimated";
+// import Animated from "react-native-reanimated";
 
 const NUM_BARS = 15;
 
@@ -15,7 +15,7 @@ const AudioVisualizer = ({ audioData }) => {
 
   return (
     <View style={styles.container}>
-      {bars.map((value, index) => (
+      {/* {bars.map((value, index) => (
         <Animated.View
           key={index}
           style={[
@@ -24,7 +24,7 @@ const AudioVisualizer = ({ audioData }) => {
             index % 2 === 0 ? styles.evenBar : styles.oddBar,
           ]}
         />
-      ))}
+      ))} */}
     </View>
   );
 };

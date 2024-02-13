@@ -1,11 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "../screens/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import SplashScreen from "../screens/SplashScreen";
 import OnboardingOne from "../screens/OnboardingOne";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
+import BottomTabNavigator from "./BottomTabNavigator";
 
 const Stack = createStackNavigator();
 
@@ -39,8 +39,8 @@ export default function AppNavigator() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="TabHome"
+          component={BottomTabNavigator}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

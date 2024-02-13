@@ -93,7 +93,7 @@ export default function LoginScreen() {
         </View>
 
         <CustomButton
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("TabHome")}
           title="Login"
           filled
           style={{ marginTop: 18, marginBottom: 4 }}

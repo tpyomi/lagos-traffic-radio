@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
-// import Animated from "react-native-reanimated";
+import Svg, { Rect } from "react-native-svg";
 
 const NUM_BARS = 15;
 
@@ -14,17 +14,19 @@ const AudioVisualizer = ({ audioData }) => {
   }, [audioData]);
 
   return (
-    <View style={styles.container}>
-      {/* {bars.map((value, index) => (
-        <Animated.View
-          key={index}
-          style={[
-            styles.bar,
-            { height: value },
-            index % 2 === 0 ? styles.evenBar : styles.oddBar,
-          ]}
-        />
-      ))} */}
+    <View>
+      <Svg height="100%" width="100%">
+        {audioData.map((data, index) => (
+          <Rect
+            key={index}
+            x={index * 10}
+            y={100 - data * 50}
+            width="10"
+            height={data * 100}
+            fill="white"
+          />
+        ))}
+      </Svg>
     </View>
   );
 };

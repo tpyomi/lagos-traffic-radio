@@ -192,10 +192,7 @@ export default function SignupScreen() {
           <Text style={{ fontSize: 16, color: COLORS.black }}>
             Already have an account?
           </Text>
-          <Pressable
-            onPress={() => navigation.navigate("loginScreen")}
-            style={{}}
-          >
+          <Pressable onPress={() => navigation.navigate("Login")} style={{}}>
             <Text
               style={{
                 fontSize: 16,

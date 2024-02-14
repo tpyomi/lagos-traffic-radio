@@ -13,76 +13,97 @@ import COLORS from "../../utils/constant/colors";
 import AudioVisualizer from "./AudioVisualizer";
 import PlaybackControl from "./PlaybackControl";
 import { Audio } from "expo-av";
-import { FileSystem } from "expo-file-system";
+import { setItem } from "../../utils/asyncStorage";
 
 const AudioPlayerModal = ({ closeModal, programData }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
+  const [apiSound, setApiSound] = useState(null);
   const [audioData, setAudioData] = useState([]);
-  const sound = useRef(new Audio.Sound());
+
+  const saveSoundToAsync = async ({ sound }) => {
+    try {
+      await setItem("apiSound", JSON.stringify(sound));
+      await setItem("isPlaying", true);
+      setIsPlaying(true);
+    } catch (error) {
+      console.error("Error saving apiSound to AsyncStorage:", error);
+    }
+  };
 
   useEffect(() => {
-    const streamUrl = "http://stream.radioparadise.com/aac-320";
-
-    const playAudio = async () => {
+    const loadAudio = async () => {
       try {
-        await sound.current.loadAsync({ uri: streamUrl }, {}, true);
-        await sound.current.playAsync();
-        setIsPlaying(true);
+        await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+
+        console.log("Loading Sound");
+        console.log("after initializing Sound");
+
+        const streamUrl = "http://stream.radioparadise.com/aac-320";
+
+        const { sound } = await Audio.Sound.createAsync(
+          { uri: streamUrl },
+          { shouldPlay: true }
+        );
+
+        console.log("Sound should be available");
+
+        setApiSound(sound);
+
+        // saveSoundToAsync(sound);
+
+        // Set up the onPlaybackStatusUpdate event handler
+        sound.setOnPlaybackStatusUpdate(async (status) => {
+          // Fetch audio data and update visualization
+          const { isBuffering } = status;
+          if (!isBuffering) {
+            const audioBuffer = await sound.getStatusAsync();
+            const amplitudeData = processAudioBuffer(audioBuffer);
+            setAudioData(amplitudeData);
+          }
+        });
       } catch (error) {
         console.error("Error playing audio", error);
       }
     };
 
-    playAudio();
-
-    sound.current.setOnPlaybackStatusUpdate((status) => {
-      if (status.isLoaded && status.isPlaying) {
-        fetchAudioData(status.positionMillis);
-      }
-    });
+    loadAudio();
 
     return () => {
-      if (sound.current) {
-        sound.current.unloadAsync();
+      // Unload audio when component unmounts
+      if (apiSound) {
+        apiSound.unloadAsync();
       }
     };
   }, []);
 
-  const fetchAudioData = async (positionMillis) => {
-    try {
-      const soundBuffer = await sound.current.getStatusAsync();
-      const arrayBuffer = await FileSystem.readAsStringAsync(soundBuffer.uri, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
-      const dataView = new DataView(arrayBuffer);
-      const newData = [];
-      for (let i = 0; i < dataView.byteLength; i += 2) {
-        const value = dataView.getInt16(i, true);
-        const normalizedValue = value / 32768;
-        newData.push(normalizedValue);
-      }
-      setAudioData(newData);
-    } catch (error) {
-      console.error("Error fetching audio data", error);
-    }
+  // Function to process audio buffer (you can adjust this according to your visualization requirements)
+  const processAudioBuffer = (audioDataArray) => {
+    console.log(audioDataArray);
+    const amplitudeData = audioDataArray.map((frame) => {
+      const amplitude =
+        frame.reduce((acc, val) => acc + Math.abs(val), 0) / frame.length;
+      return amplitude;
+    });
+
+    return amplitudeData;
   };
 
   const increaseVolume = async () => {
     const newVolume = Math.min(volume + 0.1, 1);
     setVolume(newVolume);
-    if (sound.current) {
-      await sound.current.setVolumeAsync(newVolume);
+    if (apiSound.current) {
+      await apiSound.current.setVolumeAsync(newVolume);
     }
   };
 
-  const togglePlayback = async () => {
+  const togglePlayback = () => {
     try {
       if (isPlaying) {
-        await sound.current.pauseAsync();
+        apiSound.setStatusAsync({ shouldPlay: false });
         setIsPlaying(false);
       } else {
-        await sound.current.playAsync();
+        apiSound.setStatusAsync({ shouldPlay: true });
         setIsPlaying(true);
       }
     } catch (error) {
@@ -177,6 +198,7 @@ const AudioPlayerModal = ({ closeModal, programData }) => {
             >
               <AudioVisualizer isPlaying={isPlaying} audioData={audioData} />
             </View>
+
             <PlaybackControl
               isPlaying={isPlaying}
               onTogglePlayback={togglePlayback}

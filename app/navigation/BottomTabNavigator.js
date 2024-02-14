@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import COLORS from "../../utils/constant/colors";
 import HomeScreen from "../screens/HomeScreen";
 import { StyleSheet, View, Text, Platform } from "react-native";
-import ProfileScreen from "../screens/ProfileScreen";
+import ProfileScreen from "../screens/Profilescreen";
 import SavedScreen from "../screens/SavedScreen";
 
 const Tab = createBottomTabNavigator();

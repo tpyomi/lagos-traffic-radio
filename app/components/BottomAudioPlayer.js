@@ -6,6 +6,7 @@ import COLORS from "../../utils/constant/colors";
 import AudioPlayerModal from "./AudioPlayerModal";
 
 const BottomAudioPlayer = ({ programData }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleTitleContainerPress = () => {
@@ -14,6 +15,10 @@ const BottomAudioPlayer = ({ programData }) => {
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  const togglePlayback = () => {
+    isPlaying ? setIsPlaying(false) : setIsPlaying(true);
   };
 
   return (
@@ -47,8 +52,12 @@ const BottomAudioPlayer = ({ programData }) => {
             color={COLORS.white}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Ionicons name={"play-circle"} size={56} color={COLORS.white} />
+        <TouchableOpacity onPress={togglePlayback}>
+          <Ionicons
+            name={isPlaying ? "pause-circle" : "play-circle"}
+            size={56}
+            color={COLORS.white}
+          />
         </TouchableOpacity>
         <TouchableOpacity>
           <Ionicons

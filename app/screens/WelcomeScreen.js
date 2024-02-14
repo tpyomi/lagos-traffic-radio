@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   loginLink: {
     fontSize: 16,
-    color: COLORS.secondary,
+    color: COLORS.primary,
     fontFamily: "semibold",
     marginLeft: 4,
   },

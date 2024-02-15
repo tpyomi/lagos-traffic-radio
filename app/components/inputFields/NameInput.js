@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   nameLabel: {
     fontSize: 16,
-    fontWeight: "400",
+    fontFamily: "semibold",
     marginVertical: 8,
   },
   nameInputWrapper: {

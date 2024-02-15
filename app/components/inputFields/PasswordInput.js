@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   container: { marginBottom: 12 },
   label: {
     fontSize: 16,
-    fontWeight: "400",
+    fontFamily: "semibold",
     marginVertical: 8,
   },
   fieldWrapper: {

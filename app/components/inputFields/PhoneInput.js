@@ -28,7 +28,7 @@ export default function PhoneInput({ label, placeholder }) {
 
 const styles = StyleSheet.create({
   fieldContainer: { marginBottom: 12 },
-  fieldLabel: { fontSize: 16, fontWeight: 400, marginVertical: 8 },
+  fieldLabel: { fontSize: 16, fontFamily: "semibold", marginVertical: 8 },
   fieldWrapper: {
     width: "100%",
     height: 48,

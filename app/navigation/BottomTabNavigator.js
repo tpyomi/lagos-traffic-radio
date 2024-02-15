@@ -91,6 +91,7 @@ const BottomTabNavigator = () => {
             headerShown: true,
             headerStyle: { backgroundColor: "#00002F" },
             headerTintColor: "white",
+            headerTitleAlign: "center",
             headerBackTitleVisible: true,
           }}
         />
@@ -99,6 +100,7 @@ const BottomTabNavigator = () => {
           component={SavedScreen}
           options={{
             headerShown: true,
+            headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#00002F" },
             headerTintColor: "white",
             headerBackTitleVisible: true,
@@ -109,7 +111,10 @@ const BottomTabNavigator = () => {
           component={ProfileScreen}
           options={{
             headerShown: true,
-            headerStyle: { backgroundColor: "#00002F" },
+            headerStyle: {
+              backgroundColor: "#00002F",
+            },
+            headerTitleAlign: "center",
             headerTintColor: "white",
             headerBackTitleVisible: true,
           }}

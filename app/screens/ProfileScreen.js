@@ -59,7 +59,7 @@ const ProfileScreen = () => {
       </View>
 
       <TouchableOpacity style={styles.secondElement}>
-        <MaterialIcons name="lock" size={36} color={COLORS.white} />
+        <MaterialIcons name="lock" size={26} color={COLORS.white} />
 
         <View>
           <Text style={styles.nameText}>Change password</Text>
@@ -68,17 +68,17 @@ const ProfileScreen = () => {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.thirdElement}>
-        <FontAwesome5 name="info-circle" size={24} color={COLORS.white} />
+        <FontAwesome5 name="info-circle" size={20} color={COLORS.white} />
         <Text style={styles.nameText}>About</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.thirdElement}>
-        <FontAwesome5 name="phone" size={24} color={COLORS.white} />
+        <FontAwesome5 name="phone" size={20} color={COLORS.white} />
         <Text style={styles.nameText}>Contact</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.thirdElement}>
-        <AntDesign name="logout" size={24} color={COLORS.white} />
+        <AntDesign name="logout" size={20} color={COLORS.white} />
         <Text style={styles.nameText}>Logout</Text>
       </TouchableOpacity>
 
@@ -87,8 +87,8 @@ const ProfileScreen = () => {
           <Image
             source={require("../../assets/icons/twitter.png")}
             style={{
-              height: 56,
-              width: 56,
+              height: 46,
+              width: 46,
             }}
             resizeMode="contain"
           />
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#00002F", alignItems: "center" },
   firstElement: {
     width: "100%",
-    height: "30%",
+    height: "20%",
     backgroundColor: "#141443",
     justifyContent: "flex-end",
     alignItems: "center",
@@ -200,9 +200,9 @@ const styles = StyleSheet.create({
   fourthElement: {
     width: "86%",
     height: "10%",
-    marginTop: 20,
+    marginTop: 10,
     alignItems: "center",
-    padding: 20,
+    padding: 50,
     flexDirection: "row",
     justifyContent: "center",
     gap: 50,

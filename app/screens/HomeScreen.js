@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   scheduledProgramsText: {
     color: "#FFF",
     fontSize: 14,
-    fontWeight: "bold",
+    fontFamily: "bold",
     marginTop: 20,
     marginBottom: 10,
   },

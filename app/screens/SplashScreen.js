@@ -24,7 +24,7 @@ export default function SplashScreen() {
           onPress={() => navigation.navigate("Onboarding")}
         >
           <Image
-            source={require("../../assets/images/lagos-traffic-radio-logo.png")}
+            source={require("../../assets/lagos-traffic-radio-logo.png")}
             style={styles.icon}
           />
         </TouchableOpacity>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily: "bold",
     position: "absolute",
     bottom: 20,
     textAlign: "center",

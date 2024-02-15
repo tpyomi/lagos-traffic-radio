@@ -4,10 +4,10 @@
     "slug": "LagosTrafficRadio",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/lagos-traffic-radio-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/mic.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/mic.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
@@ -32,16 +32,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      [
-        "expo-av",
-        {
-          "microphonePermission": "Allow ${name} to access your microphone."
-        }
-      ]
-    ],
-    "UIBackgroundModes": [
-      "audio"
-    ]
+    "extra": {
+      "eas": {
+        "projectId": "b11cca38-d0aa-4370-9180-76c809fd9f5f"
+      }
+    }
   }
 }

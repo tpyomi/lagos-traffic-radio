@@ -32,11 +32,11 @@ export default function SearchProgramListItem({ item }) {
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.description}>Host - {item.host}</Text>
         </View>
-      </View>
 
-      <TouchableOpacity style={styles.heart}>
-        <Ionicons name="heart-outline" size={36} color={COLORS.white} />
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.heart}>
+          <Ionicons name="heart-outline" size={36} color={COLORS.white} />
+        </TouchableOpacity>
+      </View>
 
       <Modal
         animationType="slide"
@@ -53,13 +53,12 @@ export default function SearchProgramListItem({ item }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    width: 350,
-    height: 96,
+    width: 320,
+    height: 76,
     marginHorizontal: 20,
     backgroundColor: "#323261",
     borderRadius: 10,
-    justifyContent: "space-between",
-    paddingRight: 20,
+    // justifyContent: "space-between",
   },
   imageTitle: {
     flexDirection: "row",
@@ -77,7 +76,7 @@ const styles = StyleSheet.create({
   title: { fontFamily: "bold", color: "white", marginBottom: 10, fontSize: 14 },
   description: { color: "white", fontSize: 12 },
   heart: {
-    marginLeft: 30,
+    marginLeft: 70,
     justifyContent: "center",
   },
 });

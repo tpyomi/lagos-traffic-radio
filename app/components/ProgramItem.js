@@ -47,7 +47,7 @@ export default function ProgramItem({ item }) {
 
 const styles = StyleSheet.create({
   gridItem: {
-    width: 164,
+    width: "45%",
     height: 208,
     margin: 8,
     borderRadius: 10,

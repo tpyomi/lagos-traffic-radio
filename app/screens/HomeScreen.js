@@ -22,7 +22,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.background}>
-      <SearchInput width={350} />
+      <SearchInput width={320} placeholder={"Find scheduled programs"} />
       <CategoryList
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

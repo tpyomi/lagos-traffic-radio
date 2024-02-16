@@ -50,8 +50,7 @@ const AudioPlayerModal = ({ closeModal, programData }) => {
 
         setApiSound(sound);
 
-        // saveSoundToAsync(sound);
-
+        setIsPlaying(true);
         // Set up the onPlaybackStatusUpdate event handler
         sound.setOnPlaybackStatusUpdate(async (status) => {
           // Fetch audio data and update visualization
@@ -101,6 +100,7 @@ const AudioPlayerModal = ({ closeModal, programData }) => {
     try {
       if (isPlaying) {
         apiSound.setStatusAsync({ shouldPlay: false });
+        console.log("+++++", apiSound.getStatusAsync());
         setIsPlaying(false);
       } else {
         apiSound.setStatusAsync({ shouldPlay: true });
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: "100%",
-    height: "150%",
+    height: "180%",
     backgroundColor: "#00002F",
     paddingHorizontal: 20,
     borderRadius: 10,

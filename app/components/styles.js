@@ -2,13 +2,11 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   categoryContainer: {
-    width: 350,
-    paddingHorizontal: 2,
+    width: 320,
     paddingVertical: 10,
   },
   categoryList: {
     marginTop: 20,
-    width: "100%",
   },
   categoryItem: {
     width: 67,

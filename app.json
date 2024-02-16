@@ -2,32 +2,32 @@
   "expo": {
     "name": "LagosTrafficRadio",
     "slug": "LagosTrafficRadio",
-    "version": "1.0.0",
+    "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/lagos-traffic-radio-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/mic.png",
+      "image": "./assets/adaptive-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00002F"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.LagosTrafficRadio"
+      "bundleIdentifier": "com.modetech.LagosTrafficRadio"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/mic.png",
+        "foregroundImage": "./assets/lagos-traffic-radio-logo.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
-      "package": "com.anonymous.LagosTrafficRadio"
+      "package": "com.modetech.LagosTrafficRadio"
     },
     "web": {
       "favicon": "./assets/favicon.png"

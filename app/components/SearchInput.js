@@ -2,11 +2,11 @@ import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-export default function SearchInput({ width }) {
+export default function SearchInput({ width, placeholder }) {
   return (
     <View style={[styles.searchInput, { width: width }]}>
       <TextInput
-        placeholder="Find scheduled programs"
+        placeholder={placeholder}
         placeholderTextColor="#878787"
         style={styles.inputText}
       />

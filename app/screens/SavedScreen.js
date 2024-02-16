@@ -67,7 +67,16 @@ export default function SavedScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <SearchInput width={350} />
+        <SearchInput width={320} placeholder={"Find saved programs"} />
+      </View>
+      <View
+        style={{
+          alignItems: "flex-start",
+          width: "100%",
+          paddingHorizontal: 20,
+        }}
+      >
+        <Text style={styles.scheduledProgramsText}>Saved Programs</Text>
       </View>
 
       <FlatList
@@ -89,16 +98,27 @@ export default function SavedScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#00002F",
     justifyContent: "center",
     paddingTop: 20,
     alignItems: "center",
   },
   searchContainer: {
+    height: "10%",
+    paddingBottom: 10,
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: 20,
   },
-  programList: { marginTop: 20, gap: 20 },
+  programList: { paddingTop: 10, gap: 20, paddingBottom: 30 },
+  scheduledProgramsText: {
+    color: "#FFF",
+    fontSize: 14,
+    fontFamily: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+  },
 });

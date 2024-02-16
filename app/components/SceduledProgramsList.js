@@ -9,6 +9,10 @@ const ScheduledProgramsList = ({ data }) => {
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => <ProgramItem item={item} />}
       numColumns={2}
+      contentContainerStyle={{
+        // justifyContent: "center",
+        alignItems: "center",
+      }}
     />
   );
 };

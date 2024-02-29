@@ -7,7 +7,7 @@
     "icon": "./assets/lagos-traffic-radio-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/adaptive-icon.png",
+      "image": "./assets/ltr-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#00002F"
     },

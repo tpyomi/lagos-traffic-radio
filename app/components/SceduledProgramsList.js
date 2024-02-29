@@ -10,8 +10,8 @@ const ScheduledProgramsList = ({ data }) => {
       renderItem={({ item }) => <ProgramItem item={item} />}
       numColumns={2}
       contentContainerStyle={{
-        // justifyContent: "center",
         alignItems: "center",
+        width: "100%",
       }}
     />
   );

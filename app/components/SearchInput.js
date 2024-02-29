@@ -4,7 +4,7 @@ import { Feather } from "@expo/vector-icons";
 
 export default function SearchInput({ width, placeholder }) {
   return (
-    <View style={[styles.searchInput, { width: width }]}>
+    <View style={[styles.searchInput, { width: width + "%" }]}>
       <TextInput
         placeholder={placeholder}
         placeholderTextColor="#878787"

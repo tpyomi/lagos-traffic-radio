@@ -68,11 +68,7 @@ const BottomTabNavigator = () => {
               <View style={styles.iconLabelContainer}>
                 <RoundedIcon
                   name={
-                    route.name === "Saved"
-                      ? "save-outline"
-                      : route.name === "Profile"
-                      ? "person-outline"
-                      : "home-outline"
+                    route.name === "Profile" ? "person-outline" : "home-outline"
                   }
                   size={size}
                   color={color}
@@ -92,17 +88,6 @@ const BottomTabNavigator = () => {
             headerStyle: { backgroundColor: "#00002F" },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: true,
-          }}
-        />
-        <Tab.Screen
-          name="Saved"
-          component={SavedScreen}
-          options={{
-            headerShown: true,
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#00002F" },
-            headerTintColor: "white",
             headerBackTitleVisible: true,
           }}
         />

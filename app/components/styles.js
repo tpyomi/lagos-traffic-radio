@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   categoryContainer: {
-    width: 320,
+    width: "90%",
     paddingVertical: 10,
   },
   categoryList: {

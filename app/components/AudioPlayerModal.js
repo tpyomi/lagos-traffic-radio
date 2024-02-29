@@ -13,21 +13,21 @@ import COLORS from "../../utils/constant/colors";
 import AudioVisualizer from "./AudioVisualizer";
 import PlaybackControl from "./PlaybackControl";
 import { Audio } from "expo-av";
-import { setItem } from "../../utils/asyncStorage";
+import { getItem, removeItem, setItem } from "../../utils/asyncStorage";
 
 const AudioPlayerModal = ({ closeModal, programData }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
+  const [isPlayingString, setIsPlayingString] = useState("false");
   const [apiSound, setApiSound] = useState(null);
-  const [audioData, setAudioData] = useState([]);
+  const apiSoundRef = useRef(null);
 
-  const saveSoundToAsync = async ({ sound }) => {
-    try {
-      await setItem("apiSound", JSON.stringify(sound));
-      await setItem("isPlaying", true);
-      setIsPlaying(true);
-    } catch (error) {
-      console.error("Error saving apiSound to AsyncStorage:", error);
+  const handleAudioAsyncStorage = async (isPlayingString) => {
+    if (isPlayingString === "true") {
+      await setItem("isPlaying", isPlayingString);
+      console.log("+++ WITHIN THIS ASYNC CLAUSE");
+    } else if (isPlayingString === "false") {
+      await removeItem("isPlaying");
+      console.log("--- WITHIN THIS ASYNC CLAUSE");
     }
   };
 
@@ -36,76 +36,44 @@ const AudioPlayerModal = ({ closeModal, programData }) => {
       try {
         await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
 
-        console.log("Loading Sound");
-        console.log("after initializing Sound");
-
-        const streamUrl = "http://stream.radioparadise.com/aac-320";
+        const streamUrl = "http://stream.radioparadise.com/aac-320"; // Replace with your stream URL
 
         const { sound } = await Audio.Sound.createAsync(
           { uri: streamUrl },
           { shouldPlay: true }
         );
 
-        console.log("Sound should be available");
-
         setApiSound(sound);
-
+        apiSoundRef.current = sound;
         setIsPlaying(true);
-        // Set up the onPlaybackStatusUpdate event handler
-        sound.setOnPlaybackStatusUpdate(async (status) => {
-          // Fetch audio data and update visualization
-          const { isBuffering } = status;
-          if (!isBuffering) {
-            const audioBuffer = await sound.getStatusAsync();
-            const amplitudeData = processAudioBuffer(audioBuffer);
-            setAudioData(amplitudeData);
-          }
-        });
+        handleAudioAsyncStorage("true");
       } catch (error) {
         console.error("Error playing audio", error);
       }
     };
 
-    loadAudio();
+    if (!apiSoundRef.current) {
+      loadAudio();
+    }
 
     return () => {
-      // Unload audio when component unmounts
       if (apiSound) {
-        apiSound.unloadAsync();
+        apiSound?.unloadAsync();
       }
     };
   }, []);
 
-  // Function to process audio buffer (you can adjust this according to your visualization requirements)
-  const processAudioBuffer = (audioDataArray) => {
-    console.log(audioDataArray);
-    const amplitudeData = audioDataArray.map((frame) => {
-      const amplitude =
-        frame.reduce((acc, val) => acc + Math.abs(val), 0) / frame.length;
-      return amplitude;
-    });
-
-    return amplitudeData;
-  };
-
-  const increaseVolume = async () => {
-    const newVolume = Math.min(volume + 0.1, 1);
-    setVolume(newVolume);
-    if (apiSound.current) {
-      await apiSound.current.setVolumeAsync(newVolume);
-    }
-  };
-
   const togglePlayback = () => {
     try {
       if (isPlaying) {
-        apiSound.setStatusAsync({ shouldPlay: false });
-        console.log("+++++", apiSound.getStatusAsync());
-        setIsPlaying(false);
+        apiSoundRef.current.setStatusAsync({ shouldPlay: false });
+        handleAudioAsyncStorage("false");
       } else {
-        apiSound.setStatusAsync({ shouldPlay: true });
-        setIsPlaying(true);
+        apiSoundRef.current.setStatusAsync({ shouldPlay: true });
+        handleAudioAsyncStorage("true");
       }
+      setIsPlaying(!isPlaying);
+      console.log();
     } catch (error) {
       console.error("Error toggling playback", error);
     }
@@ -196,13 +164,13 @@ const AudioPlayerModal = ({ closeModal, programData }) => {
                 justifyContent: "center",
               }}
             >
-              <AudioVisualizer isPlaying={isPlaying} audioData={audioData} />
+              <AudioVisualizer audioSound={apiSoundRef} />
             </View>
 
             <PlaybackControl
               isPlaying={isPlaying}
               onTogglePlayback={togglePlayback}
-              volume={increaseVolume}
+              volume={null}
             />
           </View>
         </View>

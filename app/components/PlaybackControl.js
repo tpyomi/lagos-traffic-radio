@@ -8,24 +8,12 @@ import COLORS from "../../utils/constant/colors";
 
 const PlaybackControl = ({ isPlaying, onTogglePlayback, volume }) => (
   <View style={styles.playbackControlContainer}>
-    <TouchableOpacity onPress={{}}>
-      <MaterialCommunityIcons
-        name="skip-previous"
-        size={30}
-        color={COLORS.white}
-      />
-    </TouchableOpacity>
-
     <TouchableOpacity onPress={onTogglePlayback}>
       <Ionicons
         name={isPlaying ? "pause-circle" : "play-circle"}
         size={86}
         color={"#7E1DE0"}
       />
-    </TouchableOpacity>
-
-    <TouchableOpacity onPress={volume}>
-      <MaterialCommunityIcons name="skip-next" size={30} color={COLORS.white} />
     </TouchableOpacity>
   </View>
 );

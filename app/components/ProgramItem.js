@@ -37,7 +37,7 @@ export default function ProgramItem({ item }) {
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={closeModal}
+        onRequestClose={() => setModalVisible(false)}
       >
         <AudioPlayerModal closeModal={closeModal} programData={item} />
       </Modal>

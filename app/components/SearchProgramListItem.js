@@ -53,12 +53,13 @@ export default function SearchProgramListItem({ item }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    width: 320,
+    width: 300,
     height: 76,
     marginHorizontal: 20,
     backgroundColor: "#323261",
     borderRadius: 10,
-    // justifyContent: "space-between",
+    justifyContent: "space-between",
+    // paddingRight: 20,
   },
   imageTitle: {
     flexDirection: "row",
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   title: { fontFamily: "bold", color: "white", marginBottom: 10, fontSize: 14 },
   description: { color: "white", fontSize: 12 },
   heart: {
-    marginLeft: 70,
+    marginLeft: 30,
     justifyContent: "center",
   },
 });

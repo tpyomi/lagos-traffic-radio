@@ -1,53 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Animated, Dimensions } from "react-native";
 import { View, StyleSheet } from "react-native";
-import Svg, { Rect } from "react-native-svg";
+import COLORS from "../../utils/constant/colors";
 
-const NUM_BARS = 15;
+const { height, width } = Dimensions.get("window");
 
-const AudioVisualizer = ({ audioData }) => {
-  const [bars, setBars] = useState(Array(NUM_BARS).fill(0));
+const Bar = ({ height }) => <Animated.View style={[styles.bar, { height }]} />;
 
+const AudioVisualizer = ({ bars }) => {
+  if (!bars) return;
   useEffect(() => {
-    // Update bars whenever audioData changes
-    const updatedBars = audioData.map((value) => value * 80); // Adjust multiplier as needed
-    setBars(updatedBars);
-  }, [audioData]);
-
+    console.log("====================================");
+    console.log(bars);
+    console.log("====================================");
+  }, [bars]);
   return (
-    <View>
-      <Svg height="100%" width="100%">
-        {audioData.map((data, index) => (
-          <Rect
-            key={index}
-            x={index * 10}
-            y={100 - data * 50}
-            width="10"
-            height={data * 100}
-            fill="white"
-          />
-        ))}
-      </Svg>
+    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      {bars.map((bar, index) => (
+        <Animated.View
+          key={index}
+          style={{
+            height: bar.interpolate({
+              // Map simulated values to bar heights (adjust range as needed)
+              inputRange: [0, 100],
+              outputRange: [100, 0], // Adjust height range based on visualization needs
+            }),
+            transform: [
+              {
+                translateY: bar.interpolate({
+                  inputRange: [0, 100],
+                  outputRange: [-25, 25],
+                }),
+              },
+            ],
+
+            backgroundColor: "white", // Customize bar color
+            width: 10, // Adjust bar width
+            margin: 2,
+            borderRadius: 10,
+          }}
+        />
+      ))}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  visualizerContainer: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
-    alignItems: "flex-end",
-    height: 70,
   },
   bar: {
+    backgroundColor: "blue",
     width: 10,
-    borderRadius: 10,
-    backgroundColor: "white", // Default color
-  },
-  evenBar: {
-    backgroundColor: "blue", // Adjust color as needed
-  },
-  oddBar: {
-    backgroundColor: "green", // Adjust color as needed
+    margin: 5,
   },
 });
 

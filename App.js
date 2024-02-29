@@ -1,7 +1,11 @@
+// import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { useFonts } from "expo-font";
 import { useCallback } from "react";
 import AppNavigator from "./app/navigation/AppNavigator";
+import { registerRootComponent } from "expo";
+
+registerRootComponent(App);
 
 export default function App() {
   const [fontsLoaded] = useFonts({

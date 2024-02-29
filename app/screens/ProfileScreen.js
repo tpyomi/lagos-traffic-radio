@@ -13,18 +13,37 @@ import COLORS from "../../utils/constant/colors";
 import BottomAudioPlayer from "../components/BottomAudioPlayer";
 import EditProfileModal from "../components/EditProfileModal";
 import SHADOWS from "../../utils/constant/shadows";
+import ContactUsModal from "../components/ContactUsModal";
+import AboutUsModal from "../components/AboutUsModal";
+import ChangePasswordModal from "../components/ChangePasswordModal";
 
 const windowWidth = Dimensions.get("window").width;
 
 const ProfileScreen = () => {
   const [shouldShow, setShouldShow] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [contactUsModalVisible, setContactUsModalVisible] = useState(false);
+  const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
+  const [changePasswordModalVisible, setChangePasswordModalVisible] =
+    useState(false);
 
   const currentProgramData = null;
 
   const handleUpdateProfile = () => {
     // Close the modal
     setModalVisible(false);
+  };
+
+  const handleContactUsModal = () => {
+    setContactUsModalVisible(false);
+  };
+
+  const handleAboutUsModal = () => {
+    setAboutUsModalVisible(false);
+  };
+
+  const handleChangePasswordModal = () => {
+    setChangePasswordModalVisible(false);
   };
 
   const user = {
@@ -58,7 +77,10 @@ const ProfileScreen = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.secondElement}>
+      <TouchableOpacity
+        style={styles.secondElement}
+        onPress={() => setChangePasswordModalVisible(true)}
+      >
         <MaterialIcons name="lock" size={26} color={COLORS.white} />
 
         <View>
@@ -67,12 +89,18 @@ const ProfileScreen = () => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.thirdElement}>
+      <TouchableOpacity
+        style={styles.thirdElement}
+        onPress={() => setAboutUsModalVisible(true)}
+      >
         <FontAwesome5 name="info-circle" size={20} color={COLORS.white} />
         <Text style={styles.nameText}>About</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.thirdElement}>
+      <TouchableOpacity
+        style={styles.thirdElement}
+        onPress={() => setContactUsModalVisible(true)}
+      >
         <FontAwesome5 name="phone" size={20} color={COLORS.white} />
         <Text style={styles.nameText}>Contact</Text>
       </TouchableOpacity>
@@ -130,6 +158,33 @@ const ProfileScreen = () => {
         onRequestClose={() => setModalVisible(false)}
       >
         <EditProfileModal user={user} onClose={handleUpdateProfile} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={contactUsModalVisible}
+        onRequestClose={() => setContactUsModalVisible(false)}
+      >
+        <ContactUsModal onClose={handleContactUsModal} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={aboutUsModalVisible}
+        onRequestClose={() => setAboutUsModalVisible(false)}
+      >
+        <AboutUsModal onClose={handleAboutUsModal} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={changePasswordModalVisible}
+        onRequestClose={() => setChangePasswordModalVisible(false)}
+      >
+        <ChangePasswordModal onClose={handleChangePasswordModal} />
       </Modal>
     </View>
   );

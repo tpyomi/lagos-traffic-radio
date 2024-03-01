@@ -15,11 +15,9 @@ const PlaybackControlComponent = ({ isPlaying, onTogglePlayback, volume }) => {
   }));
 
   return (
-    <View style={styles.footer}>
-      <Pressable style={styles.playButton} onPress={onTogglePlayback}>
-        <Animated.View style={[styles.circle, animatedCircle]} />
-      </Pressable>
-    </View>
+    <Pressable style={styles.playButton} onPress={onTogglePlayback}>
+      <Animated.View style={[styles.circle, animatedCircle]} />
+    </Pressable>
   );
 };
 

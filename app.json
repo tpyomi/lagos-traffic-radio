@@ -2,12 +2,12 @@
   "expo": {
     "name": "LagosTrafficRadio",
     "slug": "LagosTrafficRadio",
-    "version": "1.0.14",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/lagos-traffic-radio-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/ltr-splash.png",
+      "image": "./assets/splash-new.png",
       "resizeMode": "contain",
       "backgroundColor": "#00002F"
     },

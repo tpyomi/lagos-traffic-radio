@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     width: width,
     height: width,
     resizeMode: "contain",
+    padding: 20
   },
   doneButton: {
     padding: 20,

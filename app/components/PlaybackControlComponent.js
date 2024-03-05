@@ -1,12 +1,13 @@
-import { Dimensions, Pressable, StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import COLORS from "../../utils/constant/colors";
 import Animated, {
   useAnimatedStyle,
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-
-const { height, width } = Dimensions.get("window");
 
 const PlaybackControlComponent = ({ isPlaying, onTogglePlayback, volume }) => {
   const animatedCircle = useAnimatedStyle(() => ({
@@ -15,22 +16,15 @@ const PlaybackControlComponent = ({ isPlaying, onTogglePlayback, volume }) => {
   }));
 
   return (
-    <Pressable style={styles.playButton} onPress={onTogglePlayback}>
+    <TouchableOpacity style={styles.playButton} onPress={onTogglePlayback}>
       <Animated.View style={[styles.circle, animatedCircle]} />
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
 export default PlaybackControlComponent;
 
 const styles = StyleSheet.create({
-  footer: {
-    backgroundColor: "#00002F",
-    width: width,
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   playButton: {
     width: 70,
     height: 70,

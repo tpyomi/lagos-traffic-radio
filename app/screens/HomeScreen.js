@@ -21,28 +21,37 @@ export default function HomeScreen() {
   const [apiSound, setApiSound] = useState(null);
   const [bars, setBars] = useState([]);
   const apiSoundRef = useRef(null);
+  const [permission, setPermission] = useState(null);
 
-  useEffect(() => {
-    const loadAudio = async () => {
-      try {
-        await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+    useEffect(() => {
+  const requestPermission = async () => {
+  const { status } = await Audio.requestPermissionsAsync();
+  console.log('Requesting permission..', status);
+  setPermission(status); 
 
-        const streamUrl = "http://stream.radioparadise.com/aac-320"; // Replace with your stream URL
+  const loadAudio = async () => {
+        try {
+          await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
 
-        const { sound } = await Audio.Sound.createAsync(
-          { uri: streamUrl },
-          { shouldPlay: false }
-        );
+          const streamUrl = "http://stream.radioparadise.com/aac-320"; // Replace with your stream URL
 
-        setApiSound(sound);
-        apiSoundRef.current = sound;
-      } catch (error) {
-        console.error("Error playing audio", error);
-      }
-    };
+          const { sound } = await Audio.Sound.createAsync(
+            { uri: streamUrl },
+            { shouldPlay: false }
+          );
+          setApiSound(sound);
+          apiSoundRef.current = sound;
+        } catch (error) {
+          console.error("Error playing audio", error);
+        }
+      };
+      loadAudio();
+};     
 
-    loadAudio();
+  requestPermission();
 
+
+  
     return () => {
       if (apiSound) {
         apiSound?.unloadAsync();
@@ -52,7 +61,8 @@ export default function HomeScreen() {
 
   const togglePlayback = async () => {
     try {
-      if (isPlaying) {
+     if (permission === "granted") {
+       if (isPlaying) {
         apiSoundRef.current.setStatusAsync({ shouldPlay: false });
       } else {
         if (!apiSoundRef.current) return;
@@ -60,6 +70,11 @@ export default function HomeScreen() {
         calculatePitch();
       }
       setIsPlaying(!isPlaying);
+     }else{
+    const {status: togglePermission} = await Audio.requestPermissionsAsync(); 
+    setPermission(togglePermission)
+    console.log("___ . ", togglePermission);
+     }
     } catch (error) {
       console.error("Error toggling playback", error);
     }
@@ -89,7 +104,7 @@ export default function HomeScreen() {
         </View>
 
         <TouchableOpacity style={{ flexDirection: "row" }}>
-          <MaterialCommunityIcons name="share" size={24} color={COLORS.white} />
+          <MaterialCommunityIcons name="share-outline" size={32} color={COLORS.white} />
         </TouchableOpacity>
       </View>
 
@@ -135,11 +150,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#00002F",
     alignItems: "center",
     padding: 20,
-    justifyContent: "center",
   },
   modalImage: {
     width: "100%",
-    height: SIZES.xLarge * 10,
+    height: "30%",
     backgroundColor: COLORS.white,
     borderRadius: 10,
     alignItems: "center",
@@ -149,7 +163,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
   },
   podcastIcon: {
     width: 60,

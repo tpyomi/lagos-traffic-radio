@@ -82,11 +82,11 @@ export default function OnboardingOne() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
+    height: "30%",
     backgroundColor: "white",
   },
   lottie: {
-    width: width,
-    height: width,
     resizeMode: "contain",
     padding: 20
   },

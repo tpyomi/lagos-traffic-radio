@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
   },
   modalInnerContainer: {
     backgroundColor: "#00002F",
-    width: "80%",
-    height: "30%",
+    width: "90%",
+    height: "60%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,

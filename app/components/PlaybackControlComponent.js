@@ -10,13 +10,15 @@ import Animated, {
 } from "react-native-reanimated";
 
 const PlaybackControlComponent = ({ isPlaying, onTogglePlayback, volume }) => {
+          console.log("********", isPlaying);
+
   const animatedCircle = useAnimatedStyle(() => ({
     width: withSpring(isPlaying ? "60%" : "100%"),
     borderRadius: withTiming(isPlaying ? 5 : 50),
   }));
 
   return (
-    <TouchableOpacity style={styles.playButton} onPress={onTogglePlayback}>
+    <TouchableOpacity style={styles.playButton} onPress={() => onTogglePlayback()}>
       <Animated.View style={[styles.circle, animatedCircle]} />
     </TouchableOpacity>
   );

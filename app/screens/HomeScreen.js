@@ -62,6 +62,7 @@ export default function HomeScreen() {
   const togglePlayback = async () => {
     try {
      if (permission === "granted") {
+
        if (isPlaying) {
         apiSoundRef.current.setStatusAsync({ shouldPlay: false });
       } else {
@@ -69,7 +70,7 @@ export default function HomeScreen() {
         apiSoundRef.current.setStatusAsync({ shouldPlay: true });
         calculatePitch();
       }
-      setIsPlaying(!isPlaying);
+    setIsPlaying(prevState => !prevState);
      }else{
     const {status: togglePermission} = await Audio.requestPermissionsAsync(); 
     setPermission(togglePermission)
@@ -136,7 +137,7 @@ export default function HomeScreen() {
         </View>
         <PlaybackControlComponent
           isPlaying={isPlaying}
-          onTogglePlayback={togglePlayback}
+          onTogglePlayback={() => togglePlayback()}
           volume={null}
         />
       </View>

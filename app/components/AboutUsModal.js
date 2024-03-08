@@ -59,13 +59,12 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
   },
-  headerText: { color: COLORS.white, fontFamily: "bold", fontSize: 16 },
+  headerText: { color: COLORS.white, fontFamily: "bold", fontSize: 20 },
   bodyContainer: {
-    padding: 20,
-    alignItems: "center"
+    padding: 30,
   },
   body: {
     color: COLORS.white,
-    fontSize: 16
+    fontSize: 14
   }
 });

@@ -25,6 +25,7 @@ export default function EditProfileModal({ user, onClose }) {
     let permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
+      console.log("!!!",permissionResult);
     if (permissionResult.granted === false) {
       alert("Permission to access camera roll is required!");
       return;
@@ -37,14 +38,10 @@ export default function EditProfileModal({ user, onClose }) {
       quality: 1,
     });
 
-    console.log(result);
-    console.log(result.uri);
-
     if (!result.cancelled) {
-      setNewImage(result.uri);
+      setNewImage(result.assets[0].uri);
     }
   };
-  console.log(newImage);
 
   return (
     <View style={styles.modalContainer}>

@@ -19,7 +19,7 @@ const ContactUsModal = ({ onClose }) => {
 
         <Text style={styles.headerText}> Contact us</Text>
 
-        <View style={styles.location}>
+        <View style={[styles.location, {justifyContent:"flex-start"}]}>
           <Ionicons name="location" size={30} color={COLORS.white}/>
           <Text style={styles.locationText}>Broadcast Complex, Lateef Jakande Rd, Agidingbi, Ikeja.</Text>
         </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
   },
-  headerText: { color: COLORS.white, fontFamily: "bold", fontSize: 26, textAlign: "center", marginBottom: 30 },
+  headerText: { color: COLORS.white, fontFamily: "bold", fontSize: 20, textAlign: "center", marginBottom: 30 },
   location: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     textAlign: "left",
     paddingHorizontal: 20,
-    fontSize: 20
+    fontSize: 16
   }
 });

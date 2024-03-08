@@ -115,8 +115,8 @@ const ProfileScreen = () => {
           <Image
             source={require("../../assets/icons/twitter.png")}
             style={{
-              height: 46,
-              width: 46,
+              height: 36,
+              width: 36,
             }}
             resizeMode="contain"
           />
@@ -126,8 +126,8 @@ const ProfileScreen = () => {
           <Image
             source={require("../../assets/icons/facebook.png")}
             style={{
-              height: 56,
-              width: 56,
+              height: 36,
+              width: 36,
             }}
             resizeMode="contain"
           />
@@ -137,8 +137,8 @@ const ProfileScreen = () => {
           <Image
             source={require("../../assets/icons/instagram.png")}
             style={{
-              height: 56,
-              width: 56,
+              height: 36,
+              width: 36,
             }}
             resizeMode="contain"
           />
@@ -223,9 +223,9 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.4,
     color: COLORS.white,
   },
-  editIcon: { justifyContent: "flex-end" },
+  editIcon: { justifyContent: "flex-end", right: 20 },
   secondElement: {
-    width: "86%",
+    width: "90%",
     height: "12%",
     backgroundColor: "#323261",
     borderRadius: 10,
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   thirdElement: {
-    width: "86%",
+    width: "90%",
     height: "10%",
     backgroundColor: "#323261",
     borderRadius: 10,
@@ -263,8 +263,8 @@ const styles = StyleSheet.create({
     gap: 50,
   },
   fourthItem1: {
-    width: 56,
-    height: 56,
+    width: 36,
+    height:36,
     borderRadius: 99,
     backgroundColor: "white",
     alignItems: "center",
@@ -272,9 +272,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#323261",
   },
   fourthItem2: {
-    width: 56,
-    height: 56,
-    borderRadius: 10,
+    width: 36,
+    height: 36,
+    borderRadius: 6,
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",

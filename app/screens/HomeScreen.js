@@ -23,7 +23,7 @@ export default function HomeScreen() {
   const apiSoundRef = useRef(null);
   const [permission, setPermission] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
   const requestPermission = async () => {
   const { status } = await Audio.requestPermissionsAsync();
   console.log('Requesting permission..', status);
@@ -33,8 +33,7 @@ export default function HomeScreen() {
         try {
           await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
 
-          const streamUrl = "http://stream.radioparadise.com/aac-320"; // Replace with your stream URL
-
+          const streamUrl = "http://stream.radioparadise.com/aac-320";
           const { sound } = await Audio.Sound.createAsync(
             { uri: streamUrl },
             { shouldPlay: false }
@@ -65,7 +64,7 @@ export default function HomeScreen() {
 
        if (isPlaying) {
         apiSoundRef.current.setStatusAsync({ shouldPlay: false });
-      } else {
+       } else {
         if (!apiSoundRef.current) return;
         apiSoundRef.current.setStatusAsync({ shouldPlay: true });
         calculatePitch();
@@ -85,12 +84,11 @@ export default function HomeScreen() {
     const intervalId = setInterval(() => {
       const newBars = [];
       for (let i = 0; i < NUM_BARS; i++) {
-        const randomValue = Math.random() * 100; // Simulate random pitch values (0-100)
+        const randomValue = Math.random() * 100;
         newBars.push(new Animated.Value(randomValue));
       }
       setBars(newBars);
-    }, 100); // Update every 100 milliseconds
-
+    }, 100);
     return () => clearInterval(intervalId);
   };
 

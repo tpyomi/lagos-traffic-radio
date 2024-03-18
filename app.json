@@ -2,7 +2,7 @@
   "expo": {
     "name": "LagosTrafficRadio",
     "slug": "LagosTrafficRadio",
-    "version": "1.1.7",
+    "version": "1.3.3",
     "orientation": "portrait",
     "icon": "./assets/lagos-traffic-radio-logo.png",
     "userInterfaceStyle": "light",
@@ -24,7 +24,7 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.RECORD_AUDIO"
+        "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
       "package": "com.modetech.LagosTrafficRadio"
     },
@@ -37,7 +37,13 @@
       }
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+       "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
+      ]
     ]
   }
 }

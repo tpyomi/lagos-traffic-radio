@@ -16,7 +16,7 @@ const PlaybackControlComponent = ({ isPlaying, onTogglePlayback, volume }) => {
   }));
 
   return (
-    <TouchableOpacity style={styles.playButton} onPress={() => onTogglePlayback()}>
+    <TouchableOpacity style={styles.playButton} onPress={onTogglePlayback}>
       <Animated.View style={[styles.circle, animatedCircle]} />
     </TouchableOpacity>
   );

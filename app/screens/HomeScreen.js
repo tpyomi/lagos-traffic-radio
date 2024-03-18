@@ -6,79 +6,93 @@ import {
   Image,
   TouchableOpacity,
   Animated,
+  Alert
 } from "react-native";
 import uidata from "../../utils/uidata";
 import { Ionicons, Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
 import COLORS from "../../utils/constant/colors";
 import AudioVisualizer from "../components/AudioVisualizer";
-import { Audio, AnalyserNode } from "expo-av";
+import { Audio } from "expo-av";
 import SIZES from "../../utils/constant/sizes";
 import PlaybackControlComponent from "../components/PlaybackControlComponent";
+import { isLoaded } from "expo-font";
 
 const NUM_BARS = 10;
 export default function HomeScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [apiSound, setApiSound] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [bars, setBars] = useState([]);
   const apiSoundRef = useRef(null);
   const [permission, setPermission] = useState(null);
 
-  useEffect(() => {
-  const requestPermission = async () => {
-  const { status } = await Audio.requestPermissionsAsync();
-  console.log('Requesting permission..', status);
-  setPermission(status); 
+      useEffect(() => {
+        (async () => {
+          try {
+        // Request audio permissions immediately
+        const { status } = await Audio.requestPermissionsAsync({
+          android: {
+            modifyAudioSettings: true,
+          },
+        });
+        setPermission(status);
 
-  const loadAudio = async () => {
-        try {
-          await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
-
-          const streamUrl = "http://stream.radioparadise.com/aac-320";
-          const { sound } = await Audio.Sound.createAsync(
-            { uri: streamUrl },
-            { shouldPlay: false }
-          );
-          setApiSound(sound);
-          apiSoundRef.current = sound;
-        } catch (error) {
-          console.error("Error playing audio", error);
+        // Load audio if permission granted
+        if (status === 'granted') {
+          await loadAudio();
         }
-      };
-      loadAudio();
-};     
+      } catch (error) {
+        console.error('Error requesting audio permissions', error);
+      }
+    })();
 
-  requestPermission();
-
-
-  
+    // Unload audio when component unmounts
     return () => {
-      if (apiSound) {
-        apiSound?.unloadAsync();
+      if (apiSoundRef.current) {
+        apiSoundRef.current.unloadAsync();
       }
     };
   }, []);
 
-  const togglePlayback = async () => {
+    const loadAudio = async () => {
     try {
-     if (permission === "granted") {
-
-       if (isPlaying) {
-        apiSoundRef.current.setStatusAsync({ shouldPlay: false });
-       } else {
-        if (!apiSoundRef.current) return;
-        apiSoundRef.current.setStatusAsync({ shouldPlay: true });
-        calculatePitch();
-      }
-    setIsPlaying(prevState => !prevState);
-     }else{
-    const {status: togglePermission} = await Audio.requestPermissionsAsync(); 
-    setPermission(togglePermission)
-    console.log("___ . ", togglePermission);
-     }
+      await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+      const streamUrl = 'http://stream.radioparadise.com/aac-320';
+      const { sound, status } = await Audio.Sound.createAsync({ uri: streamUrl });
+      if(status.isLoaded){setIsLoaded(true)}
+      apiSoundRef.current = sound;
     } catch (error) {
-      console.error("Error toggling playback", error);
+      console.error('Error loading audio', error);
     }
   };
+
+  const togglePlayback = async () => {
+  if (!apiSoundRef.current) {
+    Alert.alert("Notice", "Hold on, audio stream is being loaded", [
+      { text: 'OK', onPress: () => console.log('Alert acknowledged') },
+    ]);
+    return;
+  }
+
+  try {
+    if (permission === "granted") {
+      if (isPlaying) {
+        await apiSoundRef.current.setStatusAsync({ shouldPlay: false });
+        console.log('========', isPlaying, ' ========');
+        setIsPlaying(false);
+      } else {
+        await apiSoundRef.current.setStatusAsync({ shouldPlay: true });
+        setIsPlaying(true);
+        calculatePitch();
+      }
+    } else {
+      const { status: togglePermission } = await Audio.requestPermissionsAsync();
+      setPermission(togglePermission);
+      console.log("___ . ", togglePermission);
+    }
+  } catch (error) {
+    console.error("Error toggling playback", error);
+  }
+};
 
   const calculatePitch = () => {
     const intervalId = setInterval(() => {
@@ -131,11 +145,12 @@ export default function HomeScreen() {
             justifyContent: "center",
           }}
         >
-          <AudioVisualizer bars={isPlaying ? bars : null} />
+            <AudioVisualizer bars={isPlaying ? bars : null} isLoaded={isLoaded? true : false} />
         </View>
+
         <PlaybackControlComponent
           isPlaying={isPlaying}
-          onTogglePlayback={() => togglePlayback()}
+          onTogglePlayback={togglePlayback}
           volume={null}
         />
       </View>

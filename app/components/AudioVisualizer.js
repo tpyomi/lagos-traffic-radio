@@ -2,21 +2,24 @@ import React, { useState, useEffect, useRef } from "react";
 import { Animated, Dimensions } from "react-native";
 import { View, StyleSheet } from "react-native";
 import COLORS from "../../utils/constant/colors";
+import Loader from "./Loader";
 
-const { height, width } = Dimensions.get("window");
-
-const Bar = ({ height }) => <Animated.View style={[styles.bar, { height }]} />;
-
-const AudioVisualizer = ({ bars }) => {
-  if (!bars) return;
+const AudioVisualizer = ({ bars, isLoaded }) => {
+  // if (!bars) return;
   useEffect(() => {
     console.log("====================================");
     console.log(bars);
     console.log("====================================");
   }, [bars]);
   return (
-    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-      {bars.map((bar, index) => (
+      <View>
+        {!isLoaded? (
+        <View style={{justifyContent: "center", alignItems: "center"}}>
+          <Loader />
+        </View>
+        ) : (
+     <View style={{ flexDirection: "row", justifyContent: "space-between"}}>
+     {bars?.map((bar, index) => (
         <Animated.View
           key={index}
           style={{
@@ -42,6 +45,8 @@ const AudioVisualizer = ({ bars }) => {
         />
       ))}
     </View>
+        )}
+      </View>
   );
 };
 

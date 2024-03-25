@@ -2,7 +2,7 @@
   "expo": {
     "name": "LagosTrafficRadio",
     "slug": "LagosTrafficRadio",
-    "version": "1.3.3",
+    "version": "1.4.1",
     "orientation": "portrait",
     "icon": "./assets/lagos-traffic-radio-logo.png",
     "userInterfaceStyle": "light",
@@ -24,26 +24,34 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.MODIFY_AUDIO_SETTINGS"
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.RECORD_AUDIO"
       ],
       "package": "com.modetech.LagosTrafficRadio"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "b11cca38-d0aa-4370-9180-76c809fd9f5f"
-      }
-    },
     "plugins": [
-      "expo-font",
+      "@react-native-google-signin/google-signin",
+       "expo-font",
       [
-       "expo-av",
+        "expo-av",
         {
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
       ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "54cb1a76-ef7c-423c-9b0f-3bcedbbe24ad"
+      }
+    },
+    "scheme": [
+      "fb830921012386291"
     ]
   }
 }
+
+
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -18,16 +18,26 @@ import PlaybackControlComponent from "../components/PlaybackControlComponent";
 import { isLoaded } from "expo-font";
 
 const NUM_BARS = 10;
-export default function HomeScreen() {
+export default function HomeScreen({userInfo}) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [bars, setBars] = useState([]);
   const apiSoundRef = useRef(null);
   const [permission, setPermission] = useState(null);
 
-      useEffect(() => {
-        (async () => {
-          try {
+  useEffect(() => {
+       grantPermission();
+
+    // Unload audio when component unmounts
+    return () => {
+      if (apiSoundRef.current) {
+        apiSoundRef.current.unloadAsync();
+      }
+    };
+  }, []);
+
+  const grantPermission = async () => {
+    try {
         // Request audio permissions immediately
         const { status } = await Audio.requestPermissionsAsync({
           android: {
@@ -43,22 +53,17 @@ export default function HomeScreen() {
       } catch (error) {
         console.error('Error requesting audio permissions', error);
       }
-    })();
-
-    // Unload audio when component unmounts
-    return () => {
-      if (apiSoundRef.current) {
-        apiSoundRef.current.unloadAsync();
-      }
-    };
-  }, []);
+  }
 
     const loadAudio = async () => {
     try {
       await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
-      const streamUrl = 'http://stream.radioparadise.com/aac-320';
+      const streamUrl = 'https://stream.radioparadise.com/aac-320';
+       
       const { sound, status } = await Audio.Sound.createAsync({ uri: streamUrl });
+    
       if(status.isLoaded){setIsLoaded(true)}
+
       apiSoundRef.current = sound;
     } catch (error) {
       console.error('Error loading audio', error);

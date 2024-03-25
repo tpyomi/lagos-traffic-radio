@@ -1,0 +1,25 @@
+{
+  "cli": {
+    "version": ">= 7.2.0"
+  },
+  "build": {
+    "development": {
+      "android": {
+      "buildType": "apk"
+      },
+      "developmentClient": false,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_GOOGLE_CLIENT_ID": "808314584135-klbnh1rpe04g9l56h2ni8ntjnp8q36mr.apps.googleusercontent.com",
+        "EXPO_PUBLIC_FACEBOOK_CLIENT_ID": "830921012386291"
+      }
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {}
+  }
+}

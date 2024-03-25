@@ -23,7 +23,7 @@ return (
 
 const styles = StyleSheet.create({
   lottie: {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 300,
   },
 });

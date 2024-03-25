@@ -9,7 +9,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import COLORS from "../../utils/constant/colors";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import ProfileScreen from "../screens/Profilescreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 

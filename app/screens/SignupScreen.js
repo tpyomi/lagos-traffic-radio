@@ -19,6 +19,8 @@ import NameInput from "../components/inputFields/NameInput";
 import EmailInput from "../components/inputFields/EmailInput";
 import PhoneInput from "../components/inputFields/PhoneInput";
 import PasswordInput from "../components/inputFields/PasswordInput";
+import FacebookLoginButton from "../components/FacebookLoginButton";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
 export default function SignupScreen() {
   const navigation = useNavigation();
@@ -133,53 +135,8 @@ export default function SignupScreen() {
             justifyContent: "center",
           }}
         >
-          <TouchableOpacity
-            onPress={() => console.log("Pressed")}
-            style={styles.altLoginBtn}
-          >
-            <Image
-              source={require("../../assets/icons/facebook.png")}
-              style={{
-                height: 26,
-                width: 26,
-                marginRight: 8,
-              }}
-              resizeMode="contain"
-            />
-            <Text>Facebook</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => console.log("Pressed")}
-            style={styles.altLoginBtn}
-          >
-            <Image
-              source={require("../../assets/icons/apple.png")}
-              style={{
-                height: 26,
-                width: 26,
-                marginRight: 8,
-              }}
-              resizeMode="contain"
-            />
-            <Text>Apple</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => console.log("Pressed")}
-            style={styles.altLoginBtn}
-          >
-            <Image
-              source={require("../../assets/icons/google.png")}
-              style={{
-                height: 26,
-                width: 26,
-                marginRight: 8,
-              }}
-              resizeMode="contain"
-            />
-            <Text>Google</Text>
-          </TouchableOpacity>
+          <FacebookLoginButton />
+          <GoogleLoginButton />
         </View>
 
         <View
